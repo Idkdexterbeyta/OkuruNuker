@@ -8,11 +8,34 @@ from discord.ext import commands
 from colorama import Fore, init
 from itertools import cycle
 from utils import *
+import requests
 
 init()
 
 version = '1.3'
 api = 'v9'
+
+out_file = "proxies.okuru"
+f = open(out_file, 'wb')
+r1 = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks4&timeout=10000&country=all")
+
+r2 = requests.get("https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/socks4.txt")
+
+r3 = requests.get("https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt")
+
+r4 = requests.get("https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt")
+
+r5 = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=socks5&timeout=10000&country=all")
+
+r6 = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all")
+
+f.write(r1.content)
+f.write(r2.content)
+f.write(r3.content)
+f.write(r4.content)
+f.write(r5.content)
+f.write(r6.content)
+f.close()
 
 util.setTitle('[Okuru Nuker] - Checking Version')
 if(not discord.__version__ in ['1.4.0', '1.4.1']):
